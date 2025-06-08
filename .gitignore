@@ -13,6 +13,8 @@
 # Specific .env files if needed, though the above should cover them
 /client/.env
 /server/.env
+server/**/.env*
+server/.env*
 
 # Build output
 /dist
