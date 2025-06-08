@@ -23,6 +23,8 @@ app.use('/api/posts', postRoutes);
 app.use(notFound);
 app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000; // Vercel handles PORT
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); // Vercel handles listening
+
+module.exports = app; // Export the app for Vercel

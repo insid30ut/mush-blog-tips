@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server/server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "outputDirectory": "dist",
+        "buildCommand": "yarn build",
+        "rootDirectory": "client"
+      }
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/server/server.js"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/client/index.html"
+    }
+  ]
+}
