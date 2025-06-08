@@ -9,6 +9,7 @@
 .env.*
 !.env.example
 !.env.template
+**/.env*
 
 # Specific .env files if needed, though the above should cover them
 /client/.env
