@@ -15,23 +15,16 @@ const Navbar = () => {
           <Link to="/" className="text-gray-300 hover:text-white">
             Home
           </Link>
-          {user ? (
+          {user && (
             <>
-              <Link to="/dashboard" className="text-gray-300 hover:text-white">
-                Dashboard
-              </Link>
+              {user.email === 'mycelialfunguy@gmail.com' && (
+                <Link to="/dashboard" className="text-gray-300 hover:text-white">
+                  Dashboard
+                </Link>
+              )}
               <button onClick={logout} className="text-gray-300 hover:text-white bg-transparent border-none">
                 Logout
               </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="text-gray-300 hover:text-white">
-                Login
-              </Link>
-              <Link to="/register" className="text-gray-300 hover:text-white">
-                Register
-              </Link>
             </>
           )}
         </div>

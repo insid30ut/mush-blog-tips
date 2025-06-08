@@ -28,6 +28,11 @@ const getPostById = asyncHandler(async (req, res) => {
 // @access  Private
 const createPost = asyncHandler(async (req, res) => {
   const { title, content } = req.body;
+if (process.env.ADMIN_USER_EMAIL && req.user.email !== process.env.ADMIN_USER_EMAIL) {
+    res.status(403); // Forbidden
+    throw new Error('User not authorized to create posts');
+  }
+
 
   const post = new Post({
     user: req.user._id,

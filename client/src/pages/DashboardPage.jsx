@@ -38,6 +38,7 @@ const DashboardPage = () => {
   if (loading) return <div className="text-center text-xl">Loading dashboard...</div>;
   if (error) return <div className="text-center text-xl text-red-500">{error}</div>;
   if (!user) return <div className="text-center text-xl">Please log in to view your dashboard.</div>;
+  if (!user.isBlogAdmin) return <div className="text-center text-xl text-red-500">You are not authorized to view this dashboard.</div>;
 
   return (
     <div className="max-w-4xl mx-auto py-8">

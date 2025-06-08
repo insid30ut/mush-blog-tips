@@ -11,11 +11,17 @@ const authUser = asyncHandler(async (req, res) => {
   const user = await User.findOne({ email });
 
   if (user && (await user.matchPassword(password))) {
+    let isBlogAdmin = false;
+    if (process.env.ADMIN_USER_EMAIL && user.email === process.env.ADMIN_USER_EMAIL) {
+      isBlogAdmin = true;
+    }
+
     res.json({
       _id: user._id,
       username: user.username,
       email: user.email,
       isAdmin: user.isAdmin,
+      isBlogAdmin: isBlogAdmin, // Add this new flag
       token: generateToken(user._id),
     });
   } else {
