@@ -1,3 +1,4 @@
+console.log(`[${new Date().toISOString()}] SERVER_LOG: server.js execution started.`);
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
