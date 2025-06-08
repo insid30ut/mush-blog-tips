@@ -7,7 +7,11 @@ const { notFound, errorHandler } = require('./middleware/errorMiddleware');
 
 dotenv.config();
 
-connectDB();
+connectDB().then(() => {
+  console.log('MongoDB Connected successfully in server.js');
+}).catch(err => {
+  console.error('MongoDB connection failed in server.js:', err.message, err.stack);
+});
 
 const app = express();
 
@@ -18,7 +22,15 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/users', userRoutes);
-app.use('/api/posts', postRoutes);
+
+// Middleware to log requests specifically to /api/posts
+app.use('/api/posts', (req, res, next) => {
+  console.log(`[${new Date().toISOString()}] SERVER_LOG: Request received for ${req.method} ${req.originalUrl}`);
+  if (req.method === 'GET' && req.path === '/') {
+    console.log(`[${new Date().toISOString()}] SERVER_LOG: Matched GET /api/posts`);
+  }
+  next();
+}, postRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
