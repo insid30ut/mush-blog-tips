@@ -11,8 +11,8 @@
 !.env.template
 
 # Specific .env files if needed, though the above should cover them
-# /client/.env
-# /server/.env
+/client/.env
+/server/.env
 
 # Build output
 /dist
