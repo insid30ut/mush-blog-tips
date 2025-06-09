@@ -36,8 +36,12 @@ app.use('/api/posts', (req, res, next) => {
 app.use(notFound);
 app.use(errorHandler);
 
-// const PORT = process.env.PORT || 5000; // Vercel handles PORT
+const PORT = process.env.PORT || 5000;
 
-// app.listen(PORT, () => console.log(`Server running on port ${PORT}`)); // Vercel handles listening
+// Only run app.listen if not in a Vercel environment (where Vercel handles it)
+// For local development, this will start the server.
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`));
+}
 
 module.exports = app; // Export the app for Vercel
